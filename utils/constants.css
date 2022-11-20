@@ -1,0 +1,6 @@
+:root {
+    --mobileBreakpoint: '460px';
+    --tabletBreakpoint: '768px';
+    --desktopBreakpoint: '960px';
+    --largeDesktopBreakpoint: '1220px';
+}
