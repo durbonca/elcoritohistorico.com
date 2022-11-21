@@ -1,8 +1,11 @@
 import Head from 'next/head'
 import { Hero, NavBar, EntryPreview } from '../components'
-
+import { getPosts } from '../api/posts'
 
 export default function Home() {
+
+  getPosts()
+
   return (
     <div>
       <Head>
