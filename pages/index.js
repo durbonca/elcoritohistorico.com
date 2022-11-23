@@ -1,10 +1,9 @@
-import Head from 'next/head'
-import { Hero, NavBar, EntryPreview } from '../components'
-import { getPosts } from '../api/posts'
+import Head from "next/head";
+import { Hero, NavBar, EntryPreview } from "../components";
+import { getPosts } from "../api/posts";
 
 export default function Home() {
-
-  getPosts()
+  getPosts();
 
   return (
     <div>
@@ -14,16 +13,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-        <Hero />
+      <Hero />
       <div className="px-5">
-      <div>
-        Últimos Episodios
-      </div>
+        <div>Últimos Episodios</div>
         <ul>
           <EntryPreview />
         </ul>
       </div>
-
     </div>
-  )
+  );
 }
