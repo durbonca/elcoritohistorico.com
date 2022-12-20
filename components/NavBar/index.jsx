@@ -1,15 +1,21 @@
-import Image from 'next/image'
-import { Disclosure } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import logoImg from '../../assets/logo.png';
+import Image from "next/image";
+import Link from "next/link";
+import { Disclosure } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import logoImg from "../../assets/logo.png";
+
 
 const navigation = [
-  { name: 'Chayanne Se Llama Elmer', href: 'https://chayanne.netlify.app/', current: false },
-  { name: 'Contáctanos', href: '/contactanos', current: false },
-]
+  {
+    name: "Chayanne Se Llama Elmer",
+    href: "https://chayanne.netlify.app/",
+    current: false,
+  },
+  { name: "Contáctanos", href: "/contactanos", current: false }
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export const NavBar = () => {
@@ -32,31 +38,35 @@ export const NavBar = () => {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
                 <div className="flex flex-shrink-0 items-center">
-                  <Image
-                    className="block h-14 w-auto lg:hidden"
-                    src={logoImg}
-                    alt="Your Company"
-                  />
-                  <Image
-                    className="hidden h-14 w-auto lg:block"
-                    src={logoImg}
-                    alt="Your Company"
-                  />
+                  <Link href="/">
+                    <Image
+                      className="block h-14 w-auto lg:hidden"
+                      src={logoImg}
+                      alt="El Corito Historico"
+                    />
+                    <Image
+                      className="hidden h-14 w-auto lg:block"
+                      src={logoImg}
+                      alt="El Corito Historico"
+                    />
+                  </Link>
                 </div>
-                <div className="hidden sm:ml-6 sm:flex sm:items-center">
+                <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
+                    {navigation.map(item => (
+                      <Link
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-800 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-800 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -66,24 +76,25 @@ export const NavBar = () => {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
+              {navigation.map(item => (
+                <Link
                   key={item.name}
-                  as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-800 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-800 hover:bg-gray-700 hover:text-white",
+                    "block px-3 py-2 rounded-md text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
-                </Disclosure.Button>
+                </Link>
               ))}
             </div>
           </Disclosure.Panel>
         </>
       )}
     </Disclosure>
-  )
-}
+  );
+};
