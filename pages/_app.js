@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { NavBar } from '../components'
+import { NavBar, Footer } from '../components'
 import '../styles/globals.css'
 
 function MyApp ({ Component, pageProps }) {
@@ -12,6 +12,7 @@ function MyApp ({ Component, pageProps }) {
       </Head>
       <NavBar />
       <Component {...pageProps} />
+      <Footer />
     </>
   )
 }

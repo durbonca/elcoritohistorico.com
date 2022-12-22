@@ -1,0 +1,48 @@
+@import "../../styles/variables";
+
+.container {
+  background-color: #121212;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.6;
+  padding: 1.875rem 0;
+}
+
+.section {
+  text-align: center;
+  margin: 0 auto;
+  padding: 0 60px;
+  width: 1220px;
+
+  @media (max-width: $desktop) {
+    width: 100%;
+    padding-inline-end: 50px;
+    padding-inline-start: 50px;
+  }
+
+  @media (max-width: $tablet) {
+    padding-inline: 40px;
+  }
+
+  @media (max-width: $mobile) {
+    padding-inline: 25px;
+  }
+}
+
+.copyright {
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+  transition: all 0.15s ease-in-out;
+  background-color: transparent;
+
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+}

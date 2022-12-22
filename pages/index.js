@@ -15,7 +15,7 @@ export const getAllPosts = async () => {
   return postsList
 }
 
-const Home = () => {
+export default function Home () {
   const [, setPosts] = useState([])
 
   const fetchPosts = async () => {
@@ -40,5 +40,3 @@ const Home = () => {
     </div>
   )
 }
-
-export default Home
