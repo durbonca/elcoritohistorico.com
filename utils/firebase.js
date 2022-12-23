@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, limit, query, orderBy, doc, getDoc, startAfter } from 'firebase/firestore'
 
 const config = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -14,4 +14,31 @@ const config = {
 const app = initializeApp(config)
 
 // Initialize Cloud Firestore and get a reference to the service
-export const db = getFirestore(app)
+const db = getFirestore(app)
+
+export const getLastPosts = async (posts = [], lastSeen = null) => {
+  let q = query(collection(db, 'posts'), limit(10), orderBy('date_creation', 'desc'))
+
+  if (lastSeen) {
+    q = query(collection(db, 'posts'), limit(10), orderBy('date_creation', 'desc'), startAfter(lastSeen))
+  }
+
+  const querySnapshot = await getDocs(q)
+  querySnapshot.forEach(doc => {
+    posts.push({ ...doc.data(), id: doc.id })
+  })
+
+  return [posts, querySnapshot.docs[querySnapshot.docs.length - 1]]
+}
+
+export const fetchPostByID = async id => {
+  console.log('id', id)
+  const docRef = doc(db, 'posts', id)
+  const docSnap = await getDoc(docRef)
+
+  if (docSnap.exists()) {
+    return docSnap
+  } else {
+    return null
+  }
+}

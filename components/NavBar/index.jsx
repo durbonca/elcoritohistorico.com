@@ -43,12 +43,12 @@ export const NavBar = () => {
                     <Image
                       className='block h-14 w-auto lg:hidden'
                       src={logoImg}
-                      alt='El Corito Historico'
+                      alt='El Corito Historico logo'
                     />
                     <Image
                       className='hidden h-14 w-auto lg:block'
                       src={logoImg}
-                      alt='El Corito Historico'
+                      alt='El Corito Historico logo'
                     />
                   </Link>
                 </div>
