@@ -7,7 +7,7 @@ export default function Home () {
 
   if (loading) {
     return (
-      <div>Armando un Corito Sano...
+      <div className='text-center text-4xl'>Armando un Corito Sano...
         <div className='flex justify-center p-4'>
           <Loading />
         </div>

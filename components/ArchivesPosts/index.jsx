@@ -1,13 +1,8 @@
 import { ArchivePost } from './ArchivePost'
 import styles from './ArchivesPosts.module.scss'
-/* import { Pagination } from "../"; */
 
 export const ArchivesPosts = ({
   posts
-  /* page,
-  totalPages,
-  setPage,
-  setPosts */
 }) => {
   return (
     <div className={styles.container}>
@@ -19,12 +14,6 @@ export const ArchivesPosts = ({
           <ArchivePost key={post.id} post={post} />
         ))}
       </ul>
-      {/* <Pagination
-        page={page}
-        totalPages={totalPages}
-        setPage={setPage}
-        setPosts={setPosts}
-      /> */}
     </div>
   )
 }

@@ -3,9 +3,12 @@ import { useRouter } from 'next/router'
 import { Context } from '../../context/context'
 import { getPostDate, extractYoutubeVideoId } from '../../utils/functions'
 import styles from './post.module.scss'
+import { Button } from '../../components'
+import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
 
 export default function Episodios () {
-  const { id } = useRouter().query
+  const router = useRouter()
+  const { id } = router.query
   const { getPostByID } = useContext(Context)
   const [post, setPost] = useState({})
 
@@ -24,11 +27,19 @@ export default function Episodios () {
 
   return (
     <div className=' p-4 max-w-5xl mx-auto min-h-screen'>
+      <Button
+        title='Volver atras'
+        onClick={() => router.back()}
+        LeftIcon={<ArrowUturnLeftIcon className='w-6' />}
+      />
       <div className={styles.entryContent}>
         <h1 className={styles.title}>{post?.title}</h1>
-        <span className={styles.date}>
-          {post && getPostDate(post?.date_creation)}
-        </span>
+        <div className='flex gap-4'>
+          <span className={styles.date}>
+            {post.date_creation && getPostDate(post?.date_creation)}
+          </span>
+          <span className={styles.category}>{post?.category?.title}</span>
+        </div>
         <h2 className={styles.subTitle}>Ve el video en youtube:</h2>
         <figure className={styles.multimedia}>
           <iframe

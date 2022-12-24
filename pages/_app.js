@@ -16,9 +16,11 @@ function MyApp ({ Component, pageProps }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <ContextProvider>
-        <NavBar />
-        <Component {...pageProps} />
-        <Footer />
+        <div className='flex flex-col justify-between min-h-screen'>
+          <NavBar />
+          <Component {...pageProps} />
+          <Footer />
+        </div>
       </ContextProvider>
     </>
   )

@@ -42,3 +42,16 @@ export const fetchPostByID = async id => {
     return null
   }
 }
+
+export const getCategories = async () => {
+  const categoriesList = []
+  try {
+    const querySnapshot = await getDocs(collection(db, 'categories'))
+    querySnapshot.forEach(doc => {
+      categoriesList.push({ ...doc.data(), id: doc.id })
+    })
+    return categoriesList
+  } catch (error) {
+    throw new Error('Fallo en obtener las categorías: ', error)
+  }
+}
