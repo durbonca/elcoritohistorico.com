@@ -14,7 +14,7 @@ export const ArchivePost = ({ post }) => {
     <li className={styles.archivePost}>
       <div className={styles.thumbnailContainer}>
         <Link href={`/episodios/${id}`} scroll>
-          <Img className={styles.thumbnail} height={500} width={500} src={file.src} alt={file.title} />
+          <Img className={styles.thumbnail} height={500} width={500} src={file.src} alt={`Imagen episodio ${title}`} />
         </Link>
       </div>
       <div className={styles.entryPreview}>
