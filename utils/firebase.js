@@ -13,26 +13,36 @@ const config = {
 
 const app = initializeApp(config)
 
+const postLenghtQuery = 10
+
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app)
 
-export const getLastPosts = async (posts = [], lastSeen = null) => {
-  let q = query(collection(db, 'posts'), limit(10), orderBy('date_creation', 'desc'))
+export const firstQuote = async () => {
+  const posts = []
+  const q = query(collection(db, 'posts'), limit(postLenghtQuery + 1), orderBy('date_creation', 'desc'))
+  const querySnapshot = await getDocs(q)
 
-  if (lastSeen) {
-    q = query(collection(db, 'posts'), limit(10), orderBy('date_creation', 'desc'), startAfter(lastSeen))
-  }
+  querySnapshot.forEach(doc => {
+    posts.push({ ...doc.data(), id: doc.id })
+  })
 
+  return [posts.slice(0, postLenghtQuery), querySnapshot.docs[postLenghtQuery]]
+}
+
+export const getLastPosts = async (posts, lastSeen) => {
+  const q = query(collection(db, 'posts'), limit(postLenghtQuery), orderBy('date_creation', 'desc'), startAfter(lastSeen))
   const querySnapshot = await getDocs(q)
   querySnapshot.forEach(doc => {
     posts.push({ ...doc.data(), id: doc.id })
   })
 
-  return [posts, querySnapshot.docs[querySnapshot.docs.length - 1]]
+  // check if is in last page
+  const isInLastPage = querySnapshot.docs.length < postLenghtQuery
+  return [posts, querySnapshot.docs[querySnapshot.docs.length - 1], isInLastPage]
 }
 
 export const fetchPostByID = async id => {
-  console.log('id', id)
   const docRef = doc(db, 'posts', id)
   const docSnap = await getDoc(docRef)
 

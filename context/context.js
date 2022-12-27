@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext } from 'react'
-import { getLastPosts, fetchPostByID, getCategories } from '../utils/firebase'
+import { getLastPosts, fetchPostByID, getCategories, firstQuote } from '../utils/firebase'
 
 const Context = createContext()
 
@@ -8,11 +8,12 @@ const ContextProvider = props => {
   const [categoryList, setCategoryList] = useState([])
   const [loading, setLoading] = useState(true)
   const [lastSeen, setLastSeen] = useState(null)
+  const [isInLastPage, setIsInLastPage] = useState(false)
 
   const fetchFirstTime = async () => {
     setLoading(true)
     const categories = await getCategories()
-    const [getPosts, getLastSeen] = await getLastPosts()
+    const [getPosts, getLastSeen] = await firstQuote()
     setCategoryList(categories)
     setPosts(getPosts)
     setLastSeen(getLastSeen)
@@ -20,7 +21,8 @@ const ContextProvider = props => {
   }
 
   const fetchMore = async () => {
-    const [getPosts, getLastSeen] = await getLastPosts(posts, lastSeen)
+    const [getPosts, getLastSeen, isInLastPage] = await getLastPosts(posts, lastSeen)
+    setIsInLastPage(isInLastPage)
     setPosts(getPosts)
     setLastSeen(getLastSeen)
   }
@@ -42,7 +44,7 @@ const ContextProvider = props => {
   }, [])
 
   return (
-    <Context.Provider value={{ posts, categoryList, loading, fetchMore, getPostByID }}>
+    <Context.Provider value={{ posts, categoryList, loading, isInLastPage, fetchMore, getPostByID }}>
       {props.children}
     </Context.Provider>
   )

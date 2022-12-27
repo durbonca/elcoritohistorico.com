@@ -3,7 +3,7 @@ import { Context } from '../../context/context'
 import { Button } from '../Button'
 
 export const LoadMore = () => {
-  const { fetchMore } = useContext(Context)
+  const { fetchMore, isInLastPage } = useContext(Context)
   const [loading, setLoading] = useState(false)
 
   const handleClick = async () => {
@@ -14,7 +14,9 @@ export const LoadMore = () => {
 
   return (
     <div className='flex justify-center'>
-      <Button title='Cargar más episodios' onClick={handleClick} disabled={loading} loading={loading} />
+      {!isInLastPage
+        ? <Button title='Cargar más episodios' onClick={handleClick} disabled={loading || isInLastPage} loading={loading} />
+        : <Button title='Parece que ya te vacilaste todos los episodios pana :(' disabled={isInLastPage} />}
     </div>
   )
 }
