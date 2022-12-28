@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { getAuth, signInAnonymously } from 'firebase/auth'
 import { getFirestore, collection, getDocs, limit, query, orderBy, doc, getDoc, startAfter } from 'firebase/firestore'
 
 const config = {
@@ -15,8 +16,13 @@ const app = initializeApp(config)
 
 const postLenghtQuery = 10
 
+// Anonimous auth
+
 // Initialize Cloud Firestore and get a reference to the service
+const auth = getAuth(app)
 const db = getFirestore(app)
+
+signInAnonymously(auth)
 
 export const firstQuote = async () => {
   const posts = []
